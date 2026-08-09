@@ -1,0 +1,93 @@
+@use "../../styles/variables" as *;
+
+.shell {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: 100dvh;
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sidebar {
+  background: $color-surface;
+  border-right: 1px solid $color-border;
+  padding: $space-6 $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-6;
+
+  @media (max-width: $breakpoint-md) {
+    flex-direction: row;
+    align-items: center;
+    border-right: 0;
+    border-bottom: 1px solid $color-border;
+    padding: $space-3 $space-4;
+  }
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  flex: 1;
+
+  a {
+    color: $color-text-muted;
+    padding: $space-2 $space-3;
+    border-radius: $radius-sm;
+
+    &:hover {
+      color: $color-text;
+      background: $color-surface-raised;
+    }
+  }
+
+  @media (max-width: $breakpoint-md) {
+    flex-direction: row;
+  }
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+
+  @media (max-width: $breakpoint-md) {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.user {
+  color: $color-text-muted;
+  font-size: 0.875rem;
+}
+
+.logout {
+  background: none;
+  border: 1px solid $color-border;
+  color: $color-text-muted;
+  border-radius: $radius-sm;
+  padding: $space-1 $space-3;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-text;
+  }
+}
+
+.main {
+  padding: $space-8;
+  min-width: 0;
+
+  @media (max-width: $breakpoint-md) {
+    padding: $space-4;
+  }
+}
