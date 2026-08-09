@@ -1,0 +1,48 @@
+@use "../styles/variables" as *;
+
+.hero {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: $space-8;
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  p {
+    max-width: 32rem;
+    color: $color-text-muted;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: $space-4;
+  margin-top: $space-6;
+}
+
+.primary,
+.secondary {
+  padding: $space-3 $space-6;
+  border-radius: $radius-md;
+  font-weight: 600;
+}
+
+.primary {
+  background: $color-primary;
+  color: $color-bg;
+
+  &:hover {
+    background: $color-primary-hover;
+    color: $color-bg;
+  }
+}
+
+.secondary {
+  border: 1px solid $color-border;
+  color: $color-text;
+}

@@ -1,0 +1,28 @@
+// Design tokens — single source of truth for the Sass layer.
+$color-bg: #0f1115;
+$color-surface: #181b21;
+$color-surface-raised: #20242c;
+$color-border: #2c313a;
+$color-text: #e8eaed;
+$color-text-muted: #9aa2ad;
+$color-primary: #6c8eef;
+$color-primary-hover: #8aa4f3;
+$color-danger: #e5655e;
+$color-success: #58b98a;
+$color-warning: #d9a441;
+
+$radius-sm: 6px;
+$radius-md: 10px;
+$radius-lg: 14px;
+
+$space-1: 0.25rem;
+$space-2: 0.5rem;
+$space-3: 0.75rem;
+$space-4: 1rem;
+$space-6: 1.5rem;
+$space-8: 2rem;
+
+$font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+
+$breakpoint-md: 768px;
+$breakpoint-lg: 1080px;
