@@ -1,0 +1,157 @@
+@use "../../../styles/variables" as *;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $space-4;
+  flex-wrap: wrap;
+  margin-bottom: $space-6;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.newButton {
+  background: $color-primary;
+  color: $color-bg;
+  font-weight: 600;
+  padding: $space-2 $space-4;
+  border-radius: $radius-md;
+
+  &:hover {
+    background: $color-primary-hover;
+    color: $color-bg;
+  }
+}
+
+.filters {
+  display: flex;
+  gap: $space-3;
+  margin-bottom: $space-4;
+  flex-wrap: wrap;
+
+  input,
+  select {
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius-sm;
+    color: $color-text;
+    padding: $space-2 $space-3;
+  }
+
+  input {
+    min-width: 16rem;
+  }
+}
+
+.tableWrap {
+  overflow-x: auto;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+
+  th,
+  td {
+    text-align: left;
+    padding: $space-3 $space-4;
+    border-bottom: 1px solid $color-border;
+    white-space: nowrap;
+  }
+
+  th {
+    color: $color-text-muted;
+    font-weight: 500;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  tbody tr:hover {
+    background: $color-surface;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: 0;
+  }
+}
+
+.pill {
+  display: inline-block;
+  padding: 0.125rem $space-3;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  text-transform: capitalize;
+  border: 1px solid $color-border;
+  color: $color-text-muted;
+
+  &[data-status="applied"] {
+    color: $color-primary;
+    border-color: $color-primary;
+  }
+
+  &[data-status="interviewing"] {
+    color: $color-warning;
+    border-color: $color-warning;
+  }
+
+  &[data-status="offer"] {
+    color: $color-success;
+    border-color: $color-success;
+  }
+
+  &[data-status="rejected"] {
+    color: $color-danger;
+    border-color: $color-danger;
+  }
+}
+
+.pagination {
+  display: flex;
+  gap: $space-3;
+  align-items: center;
+  margin-top: $space-4;
+  color: $color-text-muted;
+  font-size: 0.875rem;
+
+  a {
+    border: 1px solid $color-border;
+    border-radius: $radius-sm;
+    padding: $space-1 $space-3;
+    color: $color-text;
+  }
+}
+
+.empty {
+  border: 1px dashed $color-border;
+  border-radius: $radius-md;
+  padding: $space-8;
+  text-align: center;
+  color: $color-text-muted;
+}
+
+.skeletonRow {
+  height: 2.75rem;
+  background: linear-gradient(
+    90deg,
+    $color-surface 25%,
+    $color-surface-raised 50%,
+    $color-surface 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+  border-radius: $radius-sm;
+  margin-bottom: $space-2;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}

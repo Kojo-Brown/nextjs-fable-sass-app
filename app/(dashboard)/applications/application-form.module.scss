@@ -1,0 +1,74 @@
+@use "../../../styles/variables" as *;
+
+.form {
+  max-width: 44rem;
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-4;
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+
+  label {
+    font-size: 0.875rem;
+    color: $color-text-muted;
+  }
+
+  input,
+  select,
+  textarea {
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius-sm;
+    color: $color-text;
+    padding: $space-2 $space-3;
+
+    &:focus {
+      outline: 2px solid $color-primary;
+      outline-offset: 1px;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+  }
+}
+
+.error {
+  color: $color-danger;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.submit {
+  align-self: flex-start;
+  background: $color-primary;
+  color: $color-bg;
+  font-weight: 600;
+  border: 0;
+  border-radius: $radius-md;
+  padding: $space-3 $space-6;
+  cursor: pointer;
+
+  &:hover {
+    background: $color-primary-hover;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+}

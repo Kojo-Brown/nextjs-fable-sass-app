@@ -1,0 +1,102 @@
+@use "../../../../styles/variables" as *;
+
+.detail {
+  max-width: 52rem;
+  display: flex;
+  flex-direction: column;
+  gap: $space-6;
+
+  h2 {
+    font-size: 1.125rem;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: $space-4;
+  flex-wrap: wrap;
+
+  h1 {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+}
+
+.meta {
+  color: $color-text-muted;
+  margin: $space-1 0 0;
+  font-size: 0.875rem;
+}
+
+.actions {
+  display: flex;
+  gap: $space-3;
+}
+
+.edit {
+  border: 1px solid $color-border;
+  border-radius: $radius-sm;
+  padding: $space-1 $space-4;
+  color: $color-text;
+}
+
+.delete {
+  background: none;
+  border: 1px solid $color-danger;
+  color: $color-danger;
+  border-radius: $radius-sm;
+  padding: $space-1 $space-4;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.6;
+  }
+}
+
+.statusRow {
+  display: flex;
+  gap: $space-2;
+  flex-wrap: wrap;
+}
+
+.statusButton {
+  background: none;
+  border: 1px solid $color-border;
+  color: $color-text-muted;
+  border-radius: 999px;
+  padding: $space-1 $space-4;
+  cursor: pointer;
+  text-transform: capitalize;
+
+  &[data-active="true"] {
+    background: $color-surface-raised;
+    color: $color-text;
+    border-color: $color-primary;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: $space-4;
+  margin: 0;
+
+  dt {
+    color: $color-text-muted;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  dd {
+    margin: $space-1 0 0;
+  }
+}
+
+.longText {
+  white-space: pre-wrap;
+  color: $color-text-muted;
+  line-height: 1.6;
+}
