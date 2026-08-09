@@ -5,11 +5,18 @@ import { after } from "next/server";
 import { z } from "zod";
 import { requestMatch } from "@/lib/dal/matches";
 import { processPendingJobs } from "@/lib/jobs/queue";
+import { rateLimit } from "@/lib/rate-limit";
 
 export async function requestMatchAction(
   applicationId: string,
   resumeId: string,
 ): Promise<{ error?: string }> {
+  // AI calls cost real money — cap requests per IP per hour.
+  const rl = await rateLimit("ai-match", 20, 60 * 60_000);
+  if (!rl.ok) {
+    return { error: `Rate limit reached — try again in ${rl.retryAfterSeconds}s.` };
+  }
+
   const parsed = z
     .object({ applicationId: z.string().uuid(), resumeId: z.string().uuid() })
     .safeParse({ applicationId, resumeId });

@@ -6,6 +6,7 @@ import { hashPassword, verifyPassword } from "@/lib/auth/password";
 import { createSession, destroySession } from "@/lib/auth/session";
 import { db } from "@/lib/db";
 import { users } from "@/lib/db/schema";
+import { rateLimit } from "@/lib/rate-limit";
 import {
   loginSchema,
   registerSchema,
@@ -16,6 +17,11 @@ export async function register(
   _prev: AuthFormState,
   formData: FormData,
 ): Promise<AuthFormState> {
+  const rl = await rateLimit("register", 5, 15 * 60_000);
+  if (!rl.ok) {
+    return { error: `Too many attempts — try again in ${rl.retryAfterSeconds}s.` };
+  }
+
   const parsed = registerSchema.safeParse(Object.fromEntries(formData));
   if (!parsed.success) {
     return { fieldErrors: parsed.error.flatten().fieldErrors };
@@ -43,6 +49,11 @@ export async function login(
   _prev: AuthFormState,
   formData: FormData,
 ): Promise<AuthFormState> {
+  const rl = await rateLimit("login", 10, 15 * 60_000);
+  if (!rl.ok) {
+    return { error: `Too many attempts — try again in ${rl.retryAfterSeconds}s.` };
+  }
+
   const parsed = loginSchema.safeParse(Object.fromEntries(formData));
   if (!parsed.success) {
     return { fieldErrors: parsed.error.flatten().fieldErrors };
