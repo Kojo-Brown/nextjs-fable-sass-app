@@ -1,0 +1,50 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: fable_jobs
+      POSTGRES_USER: fable
+      POSTGRES_PASSWORD: fable
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fable -d fable_jobs"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://fable:fable@db:5432/fable_jobs
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      JOBS_RUNNER_SECRET: ${JOBS_RUNNER_SECRET:-change-me}
+      UPLOADS_DIR: /app/uploads
+    volumes:
+      - uploads:/app/uploads
+    ports:
+      - "3000:3000"
+
+  # Drains the background job queue every minute — the self-host equivalent
+  # of a Vercel cron hitting /api/jobs/run.
+  jobs-cron:
+    image: alpine:3.20
+    depends_on:
+      - web
+    environment:
+      JOBS_RUNNER_SECRET: ${JOBS_RUNNER_SECRET:-change-me}
+    command: >
+      sh -c "apk add --no-cache curl >/dev/null &&
+      while true; do
+        curl -s -X POST -H \"Authorization: Bearer $$JOBS_RUNNER_SECRET\" http://web:3000/api/jobs/run || true;
+        sleep 60;
+      done"
+
+volumes:
+  pgdata:
+  uploads:
