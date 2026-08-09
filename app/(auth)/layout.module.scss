@@ -1,0 +1,8 @@
+@use "../../styles/variables" as *;
+
+.wrap {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: $space-6;
+}
