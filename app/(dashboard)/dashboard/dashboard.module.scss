@@ -1,0 +1,218 @@
+@use "../../../styles/variables" as *;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: $space-6;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $space-4;
+  flex-wrap: wrap;
+
+  h1 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+}
+
+.ranges {
+  display: flex;
+  gap: $space-2;
+
+  a {
+    border: 1px solid $color-border;
+    border-radius: 999px;
+    padding: $space-1 $space-3;
+    color: $color-text-muted;
+    font-size: 0.875rem;
+
+    &[data-active="true"] {
+      color: $color-text;
+      border-color: $color-primary;
+      background: $color-surface-raised;
+    }
+  }
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: $space-4;
+}
+
+.tile {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  padding: $space-4;
+
+  dt {
+    color: $color-text-muted;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  dd {
+    margin: $space-2 0 0;
+    font-size: 1.75rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.card {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  padding: $space-6;
+
+  h2 {
+    font-size: 1rem;
+    color: $color-text-muted;
+    margin-bottom: $space-4;
+  }
+}
+
+.empty {
+  color: $color-text-muted;
+}
+
+.chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 180px;
+}
+
+.barColumn {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-width: 6px;
+}
+
+.bar {
+  display: block;
+  width: 100%;
+  max-width: 28px;
+  background: $color-primary;
+  border-radius: 4px 4px 0 0;
+
+  &[data-active="true"] {
+    background: $color-primary-hover;
+  }
+}
+
+.tooltip {
+  position: absolute;
+  top: -1.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: $color-surface-raised;
+  border: 1px solid $color-border;
+  border-radius: $radius-sm;
+  padding: 0.125rem $space-2;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  color: $color-text;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.chartAxis {
+  display: flex;
+  justify-content: space-between;
+  color: $color-text-muted;
+  font-size: 0.75rem;
+  margin-top: $space-2;
+}
+
+.tableToggle {
+  margin-top: $space-4;
+  font-size: 0.875rem;
+  color: $color-text-muted;
+
+  summary {
+    cursor: pointer;
+  }
+
+  table {
+    margin-top: $space-2;
+    border-collapse: collapse;
+
+    th,
+    td {
+      text-align: left;
+      padding: $space-1 $space-4 $space-1 0;
+      font-variant-numeric: tabular-nums;
+    }
+  }
+}
+
+.statusList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+
+  li {
+    display: grid;
+    grid-template-columns: 7rem 1fr 4rem;
+    align-items: center;
+    gap: $space-3;
+  }
+}
+
+.statusLabel {
+  text-transform: capitalize;
+  color: $color-text-muted;
+  font-size: 0.875rem;
+}
+
+.statusTrack {
+  background: $color-bg;
+  border-radius: 4px;
+  height: 14px;
+  overflow: hidden;
+}
+
+// Status colors always ride next to a printed label + count — identity is
+// never carried by color alone.
+.statusBar {
+  display: block;
+  height: 100%;
+  border-radius: 0 4px 4px 0;
+  background: $color-text-muted;
+  min-width: 2px;
+
+  &[data-status="applied"] {
+    background: $color-primary;
+  }
+
+  &[data-status="interviewing"] {
+    background: $color-warning;
+  }
+
+  &[data-status="offer"] {
+    background: $color-success;
+  }
+
+  &[data-status="rejected"] {
+    background: $color-danger;
+  }
+}
+
+.statusCount {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
